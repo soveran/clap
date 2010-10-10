@@ -16,7 +16,7 @@ Usage
 Using Clap is simple: just pass `ARGV` and a hash of flags, and it will extract
 the arguments as needed.
 
-    Clap.run(ARGV,
+    Clap.run ARGV,
       "-a" => lambda { |param| ... },
       "-b" => lambda { ... }
 
@@ -26,7 +26,7 @@ an array of strings.
 If you want your command line application to require a file or display a
 version number, you can configure it like this:
 
-    Clap.run(%w(-r foo -v),
+    Clap.run %w(-r foo -v),
       "-r" => lambda { |file| require file },
       "-v" => lambda { puts VERSION }
 
@@ -37,7 +37,7 @@ of the passed lambda.
 Another example, for an application that takes a `-v` flag and also a list of
 files:
 
-    files = Clap.run(%w(-v foo bar),
+    files = Clap.run %w(-v foo bar),
       "-v" => lambda { puts VERSION }
 
     files == %w(foo bar)
