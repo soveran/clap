@@ -44,6 +44,18 @@ files:
 
 If you are in doubt, check the tests for the different use cases.
 
+Ruby 1.8.x Note
+---------------
+
+When using Clap.run, you must use an empty set of arguments instead of
+leaving out the arguments entirely:
+
+    files = Clap.run ARGV,
+      "-a" => lambda {|| ... }
+
+Otherwise Clap will throw an error regarding "negative array size" for
+the arity of your lambdas.
+
 Installation
 ------------
 
