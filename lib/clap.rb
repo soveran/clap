@@ -9,7 +9,7 @@ class Clap
   end
 
   def initialize(argv, opts)
-    @argv = argv.reverse.dup
+    @argv = argv.reverse
     @opts = opts
   end
 
