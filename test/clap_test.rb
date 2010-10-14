@@ -1,7 +1,12 @@
 require File.expand_path("../lib/clap", File.dirname(__FILE__))
 
-test "flag with argument" do
+test "flag with one argument" do
   result = Clap.run %w(-x y), "-x" => lambda { |flag| assert flag == "y" }
+  assert result == []
+end
+
+test "flag with more than one argument" do
+  result = Clap.run %w(-x y z), "-x" => lambda { |y, z| assert [y, z] == %w(y z) }
   assert result == []
 end
 
@@ -13,6 +18,11 @@ end
 
 test "extract flags with parameters" do
   result = Clap.run %w(a b -x y c), "-x" => lambda { |flag| assert flag == "y" }
+  assert result == %w(a b c)
+end
+
+test "extract flags with zero arity" do
+  result = Clap.run %w(a b -x c), "-x" => lambda { || }
   assert result == %w(a b c)
 end
 

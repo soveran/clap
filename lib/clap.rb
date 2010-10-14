@@ -9,7 +9,7 @@ class Clap
   end
 
   def initialize(argv, opts)
-    @argv = argv.reverse
+    @argv = argv.dup
     @opts = opts
   end
 
@@ -17,13 +17,24 @@ class Clap
     args = []
 
     while argv.any?
-      item = argv.pop
 
-      if opts[item]
+      item = argv.shift
+      flag = opts[item]
+
+      if flag
+
+        # Work around lambda semantics in 1.8.7.
+        arity = [flag.arity, 0].max
+
+        # Raise if there are not enough parameters
+        # available for the flag.
+        if argv.size < arity
+          raise ArgumentError
+        end
 
         # Call the lambda with N items from argv,
         # where N is the lambda's arity.
-        opts[item].call(*argv.pop(opts[item].arity))
+        flag.call(*argv.shift(arity))
       else
 
         # Collect the items that don't correspond to
