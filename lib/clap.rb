@@ -23,7 +23,7 @@ class Clap
 
         # Call the lambda with N items from argv,
         # where N is the lambda's arity.
-        opts[item].call(*argv.pop(opts[item].arity))
+        opts[item].call(*argv.last(opts[item].arity))
       else
 
         # Collect the items that don't correspond to
