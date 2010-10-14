@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "clap"
-  s.version           = "0.0.1"
+  s.version           = "0.0.2"
   s.summary           = "Command line argument parsing for simple applications."
   s.description       = "Clap is a small library that can be bundled with your command line application. It covers the simple case of executing code based on the flags or parameters passed, and it does so with just under 30 lines of code."
   s.authors           = ["Michel Martens"]
