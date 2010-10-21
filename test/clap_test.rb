@@ -30,3 +30,14 @@ test "extract flags with no parameters" do
   result = Clap.run %w(a b -x c), "-x" => lambda {}
   assert result == %w(a b c)
 end
+
+test "use a method instead of a lambda" do
+  class Foo
+    def self.bar(flag)
+      assert flag == "y"
+    end
+  end
+
+  result = Clap.run %w(a b -x y c), "-x" => Foo.method(:bar)
+  assert result == %w(a b c)
+end

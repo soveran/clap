@@ -42,7 +42,29 @@ files:
 
     files == %w(foo bar)
 
-If you are in doubt, check the tests for the different use cases.
+Using methods instead of lambdas
+--------------------------------
+
+If you prefer to group the options in a module or class, you can still attach
+the methods to command line flags:
+
+    class MyApp
+      module CLI
+        def self.version
+          puts VERSION
+        end
+
+        def self.help(command)
+          puts HELP[command]
+        end
+      end
+    end
+
+    Clap.run %w(-v -h foo),
+      "-v" => MyApp::CLI.method(:version),
+      "-h" => MyApp::CLI.method(:help)
+
+When in doubt, check the tests for the different use cases.
 
 Installation
 ------------
