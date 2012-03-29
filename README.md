@@ -6,15 +6,15 @@ Command line argument parsing for simple applications.
 Description
 -----------
 
-Clap is a small library that can be bundled with your command line application.
-It covers the simple case of executing code based on the flags or parameters
-passed, and it does so with just under 30 lines of code.
+Clap is a small library that can be bundled with your command line
+application. It covers the simple case of executing code based on the
+flags or parameters passed.
 
 Usage
 -----
 
-Using Clap is simple: just pass `ARGV` and a hash of flags, and it will extract
-the arguments as needed.
+Using Clap is simple: just pass `ARGV` and a hash of flags, and it
+will extract the arguments as needed.
 
 ``` ruby
 Clap.run ARGV,
@@ -22,11 +22,11 @@ Clap.run ARGV,
   "-b" => lambda { ... }
 ```
 
-To better illustrate the usage, in the following examples `ARGV` is replaced by
-an array of strings.
+To better illustrate the usage, in the following examples `ARGV` is
+replaced by an array of strings.
 
-If you want your command line application to require a file or display a
-version number, you can configure it like this:
+If you want your command line application to require a file or display
+a version number, you can configure it like this:
 
 ``` ruby
 Clap.run %w(-r foo -v),
@@ -34,12 +34,12 @@ Clap.run %w(-r foo -v),
   "-v" => lambda { puts VERSION }
 ```
 
-This will detect the `-r` or `-v` flags and act accordingly. Note that it will
-also read the necessary number of parameters for each flag based on the arity
-of the passed lambda.
+This will detect the `-r` or `-v` flags and act accordingly. Note that
+it will also read the necessary number of parameters for each flag
+based on the arity of the passed lambda.
 
-Another example, for an application that takes a `-v` flag and also a list of
-files:
+Another example, for an application that takes a `-v` flag and also a
+list of files:
 
 ``` ruby
 files = Clap.run %w(-v foo bar),
@@ -51,8 +51,8 @@ files == %w(foo bar)
 Using methods instead of lambdas
 --------------------------------
 
-If you prefer to group the options in a module or class, you can still attach
-the methods to command line flags:
+If you prefer to group the options in a module or class, you can still
+attach the methods to command line flags:
 
 ``` ruby
 class MyApp
