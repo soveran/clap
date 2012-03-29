@@ -16,9 +16,11 @@ Usage
 Using Clap is simple: just pass `ARGV` and a hash of flags, and it will extract
 the arguments as needed.
 
-    Clap.run ARGV,
-      "-a" => lambda { |param| ... },
-      "-b" => lambda { ... }
+``` ruby
+Clap.run ARGV,
+  "-a" => lambda { |param| ... },
+  "-b" => lambda { ... }
+```
 
 To better illustrate the usage, in the following examples `ARGV` is replaced by
 an array of strings.
@@ -26,9 +28,11 @@ an array of strings.
 If you want your command line application to require a file or display a
 version number, you can configure it like this:
 
-    Clap.run %w(-r foo -v),
-      "-r" => lambda { |file| require file },
-      "-v" => lambda { puts VERSION }
+``` ruby
+Clap.run %w(-r foo -v),
+  "-r" => lambda { |file| require file },
+  "-v" => lambda { puts VERSION }
+```
 
 This will detect the `-r` or `-v` flags and act accordingly. Note that it will
 also read the necessary number of parameters for each flag based on the arity
@@ -37,10 +41,12 @@ of the passed lambda.
 Another example, for an application that takes a `-v` flag and also a list of
 files:
 
-    files = Clap.run %w(-v foo bar),
-      "-v" => lambda { puts VERSION }
+``` ruby
+files = Clap.run %w(-v foo bar),
+  "-v" => lambda { puts VERSION }
 
-    files == %w(foo bar)
+files == %w(foo bar)
+```
 
 Using methods instead of lambdas
 --------------------------------
@@ -48,21 +54,23 @@ Using methods instead of lambdas
 If you prefer to group the options in a module or class, you can still attach
 the methods to command line flags:
 
-    class MyApp
-      module CLI
-        def self.version
-          puts VERSION
-        end
-
-        def self.help(command)
-          puts HELP[command]
-        end
-      end
+``` ruby
+class MyApp
+  module CLI
+    def self.version
+      puts VERSION
     end
 
-    Clap.run %w(-v -h foo),
-      "-v" => MyApp::CLI.method(:version),
-      "-h" => MyApp::CLI.method(:help)
+    def self.help(command)
+      puts HELP[command]
+    end
+  end
+end
+
+Clap.run %w(-v -h foo),
+  "-v" => MyApp::CLI.method(:version),
+  "-h" => MyApp::CLI.method(:help)
+```
 
 When in doubt, check the tests for the different use cases.
 
