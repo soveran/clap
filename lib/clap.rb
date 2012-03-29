@@ -1,6 +1,4 @@
 class Clap
-  VERSION = "0.0.2"
-
   attr :argv
   attr :opts
 
