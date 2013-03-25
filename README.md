@@ -48,6 +48,14 @@ files = Clap.run %w(-v foo bar),
 files == %w(foo bar)
 ```
 
+If you want to allow flag aliases, pass an array as the key of the
+hash of flags:
+
+``` ruby
+Clap.run %w(--version),
+  ["-v", "--version"] => lambda { puts VERSION }
+```
+
 Using methods instead of lambdas
 --------------------------------
 

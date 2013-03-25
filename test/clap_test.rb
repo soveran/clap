@@ -41,3 +41,8 @@ test "use a method instead of a lambda" do
   result = Clap.run %w(a b -x y c), "-x" => Foo.method(:bar)
   assert result == %w(a b c)
 end
+
+test "take aliases for flags" do
+  result = Clap.run %w(--version), ["-v", "--version"] => lambda { || }
+  assert result == []
+end
