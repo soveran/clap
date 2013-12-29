@@ -41,3 +41,13 @@ test "use a method instead of a lambda" do
   result = Clap.run %w(a b -x y c), "-x" => Foo.method(:bar)
   assert result == %w(a b c)
 end
+
+test "generate help messages" do
+  clap = Clap.new %w(-r file file), "-r" => lambda { |file| }
+  assert_equal clap.help, <<-OPTIONS.gsub(/^ {4}/, "")
+    options:
+
+        -r file
+        -h
+  OPTIONS
+end

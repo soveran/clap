@@ -7,8 +7,9 @@ class Clap
   end
 
   def initialize(argv, opts)
-    @argv = argv.dup
-    @opts = opts
+    @argv         = argv.dup
+    @opts         = opts
+    @opts["-h"] ||= lambda { puts help and exit }
   end
 
   def run
@@ -42,5 +43,17 @@ class Clap
     end
 
     args
+  end
+
+  def help
+    @opts.each_with_object "options:\n\n" do |(flag, arg), help|
+      help << "    #{flag}"
+
+      unless arg.parameters.empty?
+        arg.parameters.each { |(_,name)| help << " #{name}" }
+      end
+
+      help << "\n"
+    end
   end
 end

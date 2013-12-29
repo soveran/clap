@@ -48,6 +48,26 @@ files = Clap.run %w(-v foo bar),
 files == %w(foo bar)
 ```
 
+Clap defines a `"-h"` flag which prints all possible flags and their parameters
+to stdout, then immediately exits. It only does this when you don't pass a 
+`"-h"` flag yourself.
+
+``` ruby
+Clap.run %w(-h),
+  "-r" => lambda { |file| require file },
+  "-v" => lambda { puts VERSION }
+```
+
+Prints the following:
+
+```
+options:
+
+    -r file
+    -v
+    -h
+```
+
 Using methods instead of lambdas
 --------------------------------
 
