@@ -8,7 +8,9 @@ class Clap
 
   def initialize(argv, opts)
     @argv = argv.dup
-    @opts = opts
+    @opts = opts.each_with_object({}) do |(names, block), result|
+      Array(names).each { |name| result[name] = block }
+    end
   end
 
   def run
